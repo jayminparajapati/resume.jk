@@ -1,0 +1,368 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaimin Katakiya | Deep Parallax Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;400;900&family=Space+Grotesk:wght@300;700&display=swap');
+
+        :root {
+            --bg: #000;
+            --accent: #00f2ff;
+            --purple: #7000ff;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* --- STICKY NAV --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 25px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-family: 'Space Grotesk';
+            color: var(--accent);
+            font-size: 1.5rem;
+            font-weight: 900;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: 0.3s;
+            opacity: 0.6;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+            color: var(--accent);
+        }
+
+        /* --- STACKED SECTION ENGINE --- */
+        .stack-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        section {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg);
+            overflow: hidden;
+            /* This masks the background parallax text to its own section */
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* --- BACKGROUND PARALLAX TEXT --- */
+        .parallax-bg {
+            position: absolute;
+            font-size: 20vw;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.03);
+            white-space: nowrap;
+            z-index: 0;
+            pointer-events: none;
+            text-transform: uppercase;
+            will-change: transform;
+        }
+
+        /* --- CONTENT WRAPPER --- */
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 1000px;
+            padding: 0 5%;
+        }
+
+        .section-tag {
+            color: var(--accent);
+            font-family: 'Space Grotesk';
+            letter-spacing: 5px;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        h2 {
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 900;
+            line-height: 0.9;
+            margin-bottom: 40px;
+        }
+
+        /* --- EXPERIENCE TIMELINE --- */
+        .timeline {
+            position: relative;
+            border-left: 1px solid var(--border);
+            padding-left: 40px;
+            margin-top: 20px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -46px;
+            top: 10px;
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 15px var(--accent);
+        }
+
+        .timeline-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .timeline-date {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .timeline-desc {
+            color: #888;
+            line-height: 1.6;
+        }
+
+        /* --- CONTACT FORM --- */
+        .contact-grid {
+            display: grid;
+            gap: 15px;
+            max-width: 600px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 20px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: white;
+            font-family: inherit;
+            transition: 0.3s;
+        }
+
+        .input-field:focus {
+            border-color: var(--accent);
+            outline: none;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-send {
+            background: linear-gradient(90deg, #00f2ff, #7000ff);
+            padding: 20px;
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: 900;
+            cursor: pointer;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .btn-send:hover {
+            transform: scale(1.02);
+            filter: brightness(1.2);
+            letter-spacing: 2px;
+        }
+
+        footer {
+            padding: 40px;
+            text-align: center;
+            color: #444;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">JK.</div>
+        <ul class="nav-links">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#experience">Journey</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="stack-wrapper">
+
+        <section id="hero">
+            <div class="parallax-bg" data-speed="0.2">JAIMIN</div>
+            <div class="container" style="text-align: center;">
+                <h1 style="font-size: clamp(4rem, 15vw, 12rem); font-weight: 900; line-height: 0.8;">
+                    Jaimin
+                </h1>
+                <p style="color: var(--accent); font-family: 'Space Grotesk'; letter-spacing: 10px; margin-top: 20px;">
+                    FULL STACK Developer</p>
+            </div>
+        </section>
+
+        <section id="work">
+            <div class="parallax-bg" data-speed="-0.3">PROJECTS</div>
+            <div class="container">
+                <span class="section-tag">01 WORK</span>
+                <h2>Selected Works</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <div
+                        style="padding: 30px; background: var(--glass); border: 1px solid var(--border); border-radius: 20px;">
+                        <h3>Vortex Engine</h3>
+                        <p style="color: #666; margin-top: 10px;">High-performance 3D rendering system built for the
+                            modern web.</p>
+                    </div>
+                    <div
+                        style="padding: 30px; background: var(--glass); border: 1px solid var(--border); border-radius: 20px;">
+                        <h3>Aura UI</h3>
+                        <p style="color: #666; margin-top: 10px;">A sleek, accessible design system for enterprise
+                            applications.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <div class="parallax-bg" data-speed="0.4">JOURNEY</div>
+            <div class="container">
+                <span class="section-tag">02 JOURNEY</span>
+                <h2>Experience</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>Lead Developer @ Google Cloud</h3>
+                        <div class="timeline-date">2022 - Present</div>
+                        <p class="timeline-desc">Optimizing server-side rendering and architecture for global
+                            infrastructures.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>Senior Frontend Engineer @ Meta</h3>
+                        <div class="timeline-date">2019 - 2022</div>
+                        <p class="timeline-desc">Architected core UI components utilized by millions of users daily.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>Full Stack Intern @ Tesla</h3>
+                        <div class="timeline-date">2018 - 2019</div>
+                        <p class="timeline-desc">Assisted in developing real-time telemetry dashboards for energy
+                            products.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="parallax-bg" data-speed="-0.2">CONNECT</div>
+            <div class="container">
+                <span class="section-tag">03 CONTACT</span>
+                <h2>Get In Touch</h2>
+                <form class="contact-grid">
+                    <input type="text" placeholder="Your Name" class="input-field">
+                    <input type="email" placeholder="Email Address" class="input-field">
+                    <textarea placeholder="Project Details" rows="4" class="input-field"></textarea>
+                    <button type="submit" class="btn-send">SEND MESSAGE</button>
+                </form>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        © 2025 JAIMIN KATAKIYA • CRAFTED WITH PRECISION
+    </footer>
+
+    <script>
+        // 1. SMART SECTION PARALLAX
+        // This ensures parallax text only moves within its parent section
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const scrollY = window.pageYOffset;
+
+            sections.forEach(sec => {
+                const rect = sec.getBoundingClientRect();
+                const bgText = sec.querySelector('.parallax-bg');
+
+                // Only animate if the section is currently in view
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    const speed = bgText.getAttribute('data-speed');
+                    // Calculate movement relative to the section's entry into the viewport
+                    const yPos = rect.top * speed;
+                    bgText.style.transform = `translate3d(0, ${yPos}px, 0)`;
+                }
+            });
+
+            // 2. STACKING ANIMATION (Subtle Scale)
+            sections.forEach(sec => {
+                const top = sec.getBoundingClientRect().top;
+                if (top <= 0) {
+                    const scale = 1 + (top / 5000);
+                    const opacity = 1 + (top / 1500);
+                    sec.style.transform = `scale(${scale})`;
+                    sec.style.filter = `blur(${Math.abs(top / 100)}px)`;
+                } else {
+                    sec.style.transform = `scale(1)`;
+                    sec.style.filter = `blur(0px)`;
+                }
+            });
+        });
+
+        // 3. SMOOTH NAVIGATION
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                window.scrollTo({
+                    top: target.offsetTop,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
